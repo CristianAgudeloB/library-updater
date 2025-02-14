@@ -6,7 +6,7 @@ const apiRoutes = require('./routes/api');
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.BACKEND_PORT || 5000;
 
 app.use(cors({
   origin: 'http://127.0.0.1:10000',
