@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar - Infinity Comics</title>
+  <link rel="icon" href="/images/favicon.png">
+  <!-- Enlace a Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/edit.css">
+</head>
+<body>
+  <!-- Menú superior -->
+  <header>
+    <nav class="navbar">
+        <div class="logo-container">
+          <a href="index.html">
+            <img src="/images/logo.png" alt="Logo" class="logo">
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="crear.html">Crear</a></li>
+          <li><a href="editar.html" class="active">Editar</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <!-- Sección de búsqueda -->
+  <div id="searchContainer">
+    <h2>Buscar Cómic</h2>
+    <input type="text" id="searchInput" placeholder="Ingresa el título del cómic...">
+    <!-- Contenedor para las sugerencias -->
+    <ul id="suggestionsList"></ul>
+  </div>
+
+  <!-- Formulario de edición (inicialmente oculto) -->
+  <div id="editFormContainer" style="display: none;">
+    <h2>Editar Cómic</h2>
+    <form id="editComicForm">
+      <!-- Campo oculto para el ID del cómic -->
+      <input type="hidden" id="comicId" name="comicId">
+      
+      <label for="editTitle">Título:</label>
+      <input type="text" id="editTitle" name="title" required>
+
+      <label for="editVolume">Volumen:</label>
+      <select id="editVolume" name="volume" required>
+        <option value="">Seleccione un volumen</option>
+        <!-- Las opciones se llenan dinámicamente -->
+      </select>
+
+      <label for="editCoverUrl">URL de la Portada:</label>
+      <input type="url" id="editCoverUrl" name="coverUrl" required>
+
+      <label for="editDownloadUrls">URLs de Descarga (separadas por comas):</label>
+      <input type="text" id="editDownloadUrls" name="downloadUrls" required>
+
+      <label for="editEditorial">Editorial:</label>
+      <input type="text" id="editEditorial" name="editorial" required>
+
+      <label for="editDescripcion">Descripción:</label>
+      <textarea id="editDescripcion" name="descripcion" required></textarea>
+
+      <label for="editMaqueta">Maqueta:</label>
+      <input type="text" id="editMaqueta" name="maqueta" required>
+
+      <label for="editTraductor">Traductor:</label>
+      <input type="text" id="editTraductor" name="traductor" required>
+
+      <label for="editCorrector">Corrector:</label>
+      <input type="text" id="editCorrector" name="corrector" required>
+
+      <label for="editPages">Páginas (URLs separadas por comas):</label>
+      <textarea id="editPages" name="pages"></textarea>
+
+      <button type="submit">Actualizar Cómic</button>
+    </form>
+  </div>
+
+  <script src="js/edit.js"></script>
+</body>
+</html>

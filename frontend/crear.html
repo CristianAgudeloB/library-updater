@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear - Infinity Comics</title>
+  <link rel="icon" href="/images/favicon.png">
+  <!-- Enlace a Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Menú superior -->
+  <header>
+    <nav class="navbar">
+        <div class="logo-container">
+          <a href="index.html">
+            <img src="/images/logo.png" alt="Logo" class="logo">
+          </a>
+        </div>
+        <ul class="menu">
+          <li><a href="crear.html" class="active">Crear</a></li>
+          <li><a href="editar.html">Editar</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <!-- Contenido de la sección Crear -->
+  <div id="comicFormContainer">
+    <h2>Crear Nuevo Cómic</h2>
+    <form id="comicForm">
+      <label for="title">Título:</label>
+      <input type="text" id="title" name="title" required>
+  
+      <label for="volume">Volumen:</label>
+      <select id="volume" name="volume" required>
+        <option value="">Seleccione un volumen</option>
+        <!-- Las opciones se llenan dinámicamente con JavaScript -->
+      </select>
+  
+      <label for="coverUrl">URL de la Portada:</label>
+      <input type="url" id="coverUrl" name="coverUrl" required>
+  
+      <label for="downloadUrls">URLs de Descarga (separadas por comas):</label>
+      <input type="text" id="downloadUrls" name="downloadUrls" required>
+  
+      <label for="editorial">Editorial:</label>
+      <input type="text" id="editorial" name="editorial" required>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" required></textarea>
+      
+      <label for="maqueta">Maqueta:</label>
+      <input type="text" id="maqueta" name="maqueta" required>
+  
+      <label for="traductor">Traductor:</label>
+      <input type="text" id="traductor" name="traductor" required>
+
+      <label for="corrector">Corrector:</label>
+      <input type="text" id="corrector" name="corrector" required>
+  
+      <label for="pages">Páginas (URLs separadas por comas):</label>
+      <textarea id="pages" name="pages"></textarea>
+  
+      <button type="submit">Añadir Cómic</button>
+    </form>
+  </div>
+
+  <div id="seriesFormContainer">
+    <h2>Crear Nueva Serie</h2>
+    <form id="seriesForm">
+      <label for="seriesName">Nombre de la Serie:</label>
+      <input type="text" id="seriesName" name="seriesName" required>
+  
+      <label for="seriesDescription">Descripción:</label>
+      <textarea id="seriesDescription" name="seriesDescription" required></textarea>
+  
+      <button type="submit">Crear Serie</button>
+    </form>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
