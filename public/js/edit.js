@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Añadir clase al input
             searchInput.classList.add('searching');
     
-            const response = await fetch(`http://localhost:5000/api/comics?title=${encodeURIComponent(query)}`);
+            const response = await fetch(`/api/comics?title=${encodeURIComponent(query)}`);
             if (!response.ok) throw new Error('Error en la respuesta del servidor');
             
             const comics = await response.json();
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar series para el select
     const loadSeries = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/series');
+            const response = await fetch('/api/series');
             if (!response.ok) throw new Error('Error al cargar series');
             
             const series = await response.json();
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:5000/api/comics/${comicId}`, {
+            const response = await fetch(`/api/comics/${comicId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
