@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeSelect = document.getElementById('volume');
   
     // Cargar series existentes
-    fetch('http://localhost:5000/api/series')
+    fetch('https://library-updater.onrender.com/api/series')
       .then(response => response.json())
       .then(series => {
         series.forEach(serie => {
