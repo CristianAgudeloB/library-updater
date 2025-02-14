@@ -22,4 +22,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Registrar las rutas de la API
 app.use('/api', apiRoutes);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
