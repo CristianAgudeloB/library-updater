@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeSelect = document.getElementById('volume');
   
     // Cargar series existentes
-    fetch('https://library-updater.onrender.com/api/series')
+    fetch('/api/series')
       .then(response => response.json())
       .then(series => {
         series.forEach(serie => {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const seriesDescription = document.getElementById('seriesDescription').value;
 
     // Realizar el POST para crear la serie
-    const response = await fetch('http://localhost:5000/api/series', {
+    const response = await fetch('/api/series', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: seriesName, description: seriesDescription })
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Realizar el POST para crear el cómic
-    const response = await fetch('http://localhost:5000/api/comics', {
+    const response = await fetch('/api/comics', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
