@@ -33,10 +33,10 @@
       <input type="text" id="title" name="title" required>
   
       <label for="volume">Volumen:</label>
-      <select id="volume" name="volume" required>
-        <option value="">Seleccione un volumen</option>
-        <!-- Las opciones se llenan dinámicamente con JavaScript -->
-      </select>
+      <input type="text" id="volume" name="volume" list="volumeSuggestions" required autocomplete="off">
+      <datalist id="volumeSuggestions">
+        <!-- Las opciones se llenan dinámicamente -->
+      </datalist>
   
       <label for="coverUrl">URL de la Portada:</label>
       <input type="url" id="coverUrl" name="coverUrl" required>
@@ -50,11 +50,11 @@
       <label for="descripcion">Descripción:</label>
       <textarea id="descripcion" name="descripcion" required></textarea>
       
-      <label for="maqueta">Maqueta:</label>
-      <input type="text" id="maqueta" name="maqueta" required>
-  
       <label for="traductor">Traductor:</label>
       <input type="text" id="traductor" name="traductor" required>
+
+      <label for="maqueta">Maqueta:</label>
+      <input type="text" id="maqueta" name="maqueta" required>
 
       <label for="corrector">Corrector:</label>
       <input type="text" id="corrector" name="corrector" required>
