@@ -15,11 +15,33 @@ router.get('/series', async (req, res) => {
 
 // Crear una nueva serie
 router.post('/series', async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, editorial } = req.body; // Añadido editorial
   try {
-    const newSeries = new SeriesInfo({ name, description });
+    const newSeries = new SeriesInfo({ name, description, editorial });
     await newSeries.save();
     res.status(201).json(newSeries);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Actualizar una serie por ID
+router.put('/series/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, description, editorial } = req.body;
+  
+  try {
+    const updatedSeries = await SeriesInfo.findByIdAndUpdate(
+      id,
+      { name, description, editorial },
+      { new: true, runValidators: true }
+    );
+    
+    if (!updatedSeries) {
+      return res.status(404).json({ message: 'Serie no encontrada' });
+    }
+    
+    res.json(updatedSeries);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -78,7 +100,6 @@ router.get('/comics', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 
 // Actualizar un cómic (PUT)
 router.put('/comics/:id', async (req, res) => {

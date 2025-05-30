@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear - Infinity Comics</title>
   <link rel="icon" href="./images/favicon.png">
-  <!-- Enlace a Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-  <!-- Menú superior -->
   <header>
     <nav class="navbar">
         <div class="logo-container">
@@ -32,7 +30,7 @@
       <label for="title">Título:</label>
       <input type="text" id="title" name="title" required>
   
-      <label for="volume">Volumen:</label>
+      <label for="volume">Volumen (Serie):</label>
       <input type="text" id="volume" name="volume" list="volumeSuggestions" required autocomplete="off">
       <datalist id="volumeSuggestions">
         <!-- Las opciones se llenan dinámicamente -->
@@ -44,9 +42,6 @@
       <label for="downloadUrls">URLs de Descarga (separadas por comas):</label>
       <input type="text" id="downloadUrls" name="downloadUrls" required>
   
-      <label for="editorial">Editorial:</label>
-      <input type="text" id="editorial" name="editorial" required>
-
       <label for="descripcion">Descripción:</label>
       <textarea id="descripcion" name="descripcion" required></textarea>
       
@@ -74,6 +69,9 @@
   
       <label for="seriesDescription">Descripción:</label>
       <textarea id="seriesDescription" name="seriesDescription" required></textarea>
+      
+      <label for="seriesEditorial">Editorial:</label>
+      <input type="text" id="seriesEditorial" name="seriesEditorial" required>
   
       <button type="submit">Crear Serie</button>
     </form>

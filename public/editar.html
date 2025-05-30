@@ -5,39 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar - Infinity Comics</title>
   <link rel="icon" href="./images/favicon.png">
-  <!-- Enlace a Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/edit.css">
 </head>
 <body>
-  <!-- Menú superior -->
   <header>
     <nav class="navbar">
-        <div class="logo-container">
-          <a href="index.html">
-            <img src="/images/logo.png" alt="Logo" class="logo">
-          </a>
-        </div>
-        <ul class="menu">
-          <li><a href="crear.html">Crear</a></li>
-          <li><a href="editar.html" class="active">Editar</a></li>
-        </ul>
-      </nav>
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="/images/logo.png" alt="Logo" class="logo">
+        </a>
+      </div>
+      <ul class="menu">
+        <li><a href="crear.html">Crear</a></li>
+        <li><a href="editar.html" class="active">Editar</a></li>
+      </ul>
+    </nav>
   </header>
+
+  <!-- Selector de tipo de edición -->
+  <div class="edit-type-selector">
+    <button id="comicEditBtn" class="active">Editar Cómics</button>
+    <button id="seriesEditBtn">Editar Series</button>
+  </div>
 
   <!-- Sección de búsqueda -->
   <div id="searchContainer">
-    <h2>Buscar Cómic</h2>
-    <input type="text" id="searchInput" placeholder="Ingresa el título del cómic...">
-    <!-- Contenedor para las sugerencias -->
+    <h2 id="searchTitle">Buscar Cómic</h2>
+    <input type="text" id="searchInput" placeholder="Ingresa el título...">
     <ul id="suggestionsList"></ul>
   </div>
 
-  <!-- Formulario de edición (inicialmente oculto) -->
-  <div id="editFormContainer" style="display: none;">
+  <!-- Formulario de edición de cómic -->
+  <div id="editComicFormContainer" class="edit-form">
     <h2>Editar Cómic</h2>
     <form id="editComicForm">
-      <!-- Campo oculto para el ID del cómic -->
       <input type="hidden" id="comicId" name="comicId">
       
       <label for="editTitle">Título:</label>
@@ -46,7 +48,6 @@
       <label for="editVolume">Volumen:</label>
       <select id="editVolume" name="volume" required>
         <option value="">Seleccione un volumen</option>
-        <!-- Las opciones se llenan dinámicamente -->
       </select>
 
       <label for="editCoverUrl">URL de la Portada:</label>
@@ -74,6 +75,25 @@
       <textarea id="editPages" name="pages"></textarea>
 
       <button type="submit">Actualizar Cómic</button>
+    </form>
+  </div>
+
+  <!-- Formulario de edición de serie -->
+  <div id="editSeriesFormContainer" class="edit-form" style="display: none;">
+    <h2>Editar Serie</h2>
+    <form id="editSeriesForm">
+      <input type="hidden" id="seriesId" name="seriesId">
+      
+      <label for="editName">Nombre:</label>
+      <input type="text" id="editName" name="name" required>
+
+      <label for="editSeriesDescription">Descripción:</label>
+      <textarea id="editSeriesDescription" name="description" required></textarea>
+
+      <label for="editSeriesEditorial">Editorial:</label>
+      <input type="text" id="editSeriesEditorial" name="editorial" required>
+
+      <button type="submit">Actualizar Serie</button>
     </form>
   </div>
 

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para buscar series
   const searchSeries = async (query) => {
     try {
-      const response = await fetch(`/api/series?search=${encodeURIComponent(query)}`);
+      const response = await fetch(`/api/series?name=${encodeURIComponent(query)}`);
       if (!response.ok) throw new Error('Error en la búsqueda');
       return await response.json();
     } catch (error) {
@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Actualizar sugerencias
   const updateSuggestions = (series) => {
-    volumeSuggestions.innerHTML = ''; // Limpiar sugerencias anteriores
+    volumeSuggestions.innerHTML = '';
     currentSeries = series;
 
     series.forEach(serie => {
       const option = document.createElement('option');
-      option.value = serie.name; // El valor que se mostrará en el datalist
-      option.dataset.id = serie._id; // Opcional: para usar el ID si es necesario
+      option.value = serie.name;
+      option.dataset.id = serie._id;
       volumeSuggestions.appendChild(option);
     });
   };
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Búsqueda con debounce
   const debouncedSearch = debounce(async (query) => {
     if (query.length < 2) {
-      volumeSuggestions.innerHTML = ''; // Limpiar si la búsqueda es muy corta
+      volumeSuggestions.innerHTML = '';
       return;
     }
 
@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
   titleInput.addEventListener('input', (e) => {
     const query = e.target.value.trim();
 
-    // Si el título coincide con una serie existente, sugerir automáticamente
     if (currentSeries.length > 0) {
       const matchingSerie = currentSeries.find(serie =>
         serie.name.toLowerCase().includes(query.toLowerCase())
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Realizar búsqueda basada en el título
     debouncedSearch(query);
   });
 
@@ -75,21 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const seriesName = document.getElementById('seriesName').value;
     const seriesDescription = document.getElementById('seriesDescription').value;
+    const seriesEditorial = document.getElementById('seriesEditorial').value;
 
-    const response = await fetch('/api/series', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: seriesName, description: seriesDescription })
-    });
+    try {
+      const response = await fetch('/api/series', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          name: seriesName, 
+          description: seriesDescription,
+          editorial: seriesEditorial
+        })
+      });
 
-    if (response.ok) {
-      alert('Serie creada con éxito');
-      seriesForm.reset();
+      if (response.ok) {
+        alert('Serie creada con éxito');
+        seriesForm.reset();
 
-      // Actualizar sugerencias con la nueva serie
-      const newSeries = await searchSeries(titleInput.value);
-      updateSuggestions(newSeries);
-    } else {
+        // Actualizar sugerencias con la nueva serie
+        const newSeries = await searchSeries(titleInput.value);
+        updateSuggestions(newSeries);
+      } else {
+        const errorData = await response.json();
+        alert(`Error al crear la serie: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
       alert('Error al crear la serie');
     }
   });
@@ -98,30 +107,35 @@ document.addEventListener('DOMContentLoaded', () => {
   comicForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(comicForm);
-    const data = {
-      title: formData.get('title'),
-      volume: formData.get('volume'),
-      coverUrl: formData.get('coverUrl'),
-      downloadUrls: formData.get('downloadUrls').split(','),
-      editorial: formData.get('editorial'),
-      corrector: formData.get('corrector'),
-      descripcion: formData.get('descripcion'),
-      maqueta: formData.get('maqueta'),
-      traductor: formData.get('traductor'),
-      pages: formData.get('pages').split(',')
-    };
+    try {
+      const formData = new FormData(comicForm);
+      const data = {
+        title: formData.get('title'),
+        volume: formData.get('volume'),
+        coverUrl: formData.get('coverUrl'),
+        downloadUrls: formData.get('downloadUrls').split(',').map(url => url.trim()),
+        corrector: formData.get('corrector'),
+        descripcion: formData.get('descripcion'),
+        maqueta: formData.get('maqueta'),
+        traductor: formData.get('traductor'),
+        pages: formData.get('pages').split(',').map(page => page.trim())
+      };
 
-    const response = await fetch('/api/comics', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+      const response = await fetch('/api/comics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
-    if (response.ok) {
-      alert('Cómic añadido con éxito');
-      comicForm.reset();
-    } else {
+      if (response.ok) {
+        alert('Cómic añadido con éxito');
+        comicForm.reset();
+      } else {
+        const errorData = await response.json();
+        alert(`Error al añadir el cómic: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
       alert('Error al añadir el cómic');
     }
   });
